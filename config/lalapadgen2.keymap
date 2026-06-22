@@ -14,17 +14,6 @@
 
 &lt { quick-tap-ms = <200>; };
 
-/* 加速度 */
-&pointer_accel {
-    input-type = <INPUT_EV_REL>;  // For relative input devices
-    track-remainders;             // Accumulate fractional movements
-    min-factor = <800>;          // 0.8x at very slow speeds
-    max-factor = <3000>;         // 3.0x at fast speeds
-    speed-threshold = <1200>;     // 1200 counts/sec for 1x
-    speed-max = <6000>;          // 6000 counts/sec for max accel
-    acceleration-exponent = <2>;  // Quadratic acceleration curve
-};
-
 &trackpad_listener_L {
     status = "okay"; /* 最初はdisabledになっているので、ここで有効化します */
 
@@ -234,5 +223,19 @@
             if-layers = <2 1>;
             then-layer = <3>;
         };
+    };
+
+    /* 加速度 */
+    pointer_accel: pointer_accel {
+        compatible = "zmk,input-processor-pointing-acceleration";
+        #input-processor-cells = <0>;
+
+        input-type = <INPUT_EV_REL>;
+        track-remainders;
+        min-factor = <800>;
+        max-factor = <3000>;
+        speed-threshold = <1200>;
+        speed-max = <6000>;
+        acceleration-exponent = <2>;
     };
 };
