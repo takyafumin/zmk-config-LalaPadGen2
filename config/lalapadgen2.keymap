@@ -14,6 +14,17 @@
 
 &lt { quick-tap-ms = <200>; };
 
+/* 加速度 */
+&pointer_accel {
+    input-type = <INPUT_EV_REL>;  // For relative input devices
+    track-remainders;             // Accumulate fractional movements
+    min-factor = <800>;          // 0.8x at very slow speeds
+    max-factor = <3000>;         // 3.0x at fast speeds
+    speed-threshold = <1200>;     // 1200 counts/sec for 1x
+    speed-max = <6000>;          // 6000 counts/sec for max accel
+    acceleration-exponent = <2>;  // Quadratic acceleration curve
+};
+
 &trackpad_listener_L {
     status = "okay"; /* 最初はdisabledになっているので、ここで有効化します */
 
@@ -22,7 +33,8 @@
                       <&zip_xy_scaler 1 5>,        /* 5倍速（等速） */
                       <&zip_scroll_scaler 1 12>,
                       <&zip_dynamic_xy_scaler>,
-                      <&zip_dynamic_scroll_scaler>;
+                      <&zip_dynamic_scroll_scaler>,
+                      <&pointer_accel>;
 
     /* レイヤー1または2（精細・低速モード）に入ったときの速度調整 */
     lowspeedmode {
@@ -42,7 +54,8 @@
                       <&zip_xy_scaler 1 5>,
                       <&zip_scroll_scaler 1 12>,
                       <&zip_dynamic_xy_scaler>,
-                      <&zip_dynamic_scroll_scaler>;
+                      <&zip_dynamic_scroll_scaler>,
+                      <&pointer_accel>;
 
     lowspeedmode {
         layers = <1 2>;
