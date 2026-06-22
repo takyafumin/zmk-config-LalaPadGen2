@@ -22,8 +22,7 @@
                       <&zip_xy_scaler 1 5>,        /* 5倍速（等速） */
                       <&zip_scroll_scaler 1 12>,
                       <&zip_dynamic_xy_scaler>,
-                      <&zip_dynamic_scroll_scaler>,
-                      <&pointer_accel>;
+                      <&zip_dynamic_scroll_scaler>;
 
     /* レイヤー1または2（精細・低速モード）に入ったときの速度調整 */
     lowspeedmode {
@@ -43,8 +42,7 @@
                       <&zip_xy_scaler 1 5>,
                       <&zip_scroll_scaler 1 12>,
                       <&zip_dynamic_xy_scaler>,
-                      <&zip_dynamic_scroll_scaler>,
-                      <&pointer_accel>;
+                      <&zip_dynamic_scroll_scaler>;
 
     lowspeedmode {
         layers = <1 2>;
@@ -223,19 +221,5 @@
             if-layers = <2 1>;
             then-layer = <3>;
         };
-    };
-
-    /* 加速度 */
-    pointer_accel: pointer_accel {
-        compatible = "zmk,input-processor-pointing-acceleration";
-        #input-processor-cells = <0>;
-
-        input-type = <INPUT_EV_REL>;
-        track-remainders;
-        min-factor = <800>;
-        max-factor = <3000>;
-        speed-threshold = <1200>;
-        speed-max = <6000>;
-        acceleration-exponent = <2>;
     };
 };
