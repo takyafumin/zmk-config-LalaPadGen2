@@ -14,16 +14,16 @@
 
 &lt { quick-tap-ms = <200>; };
 
-/ {
-    &trackpad_listener {
-        input-processors = <&zip_xy_scaler 1 1>; /* 通常速度 */
-        precise {
-            layers = <1>;
-            input-processors = <&zip_xy_scaler 1 4>; /* レイヤー中は1/4の速度 */
-            process-next;
-        };
+&trackpad_listener {
+    input-processors = <&zip_xy_scaler 1 1>; /* 通常速度 */
+    precise {
+        layers = <1>;
+        input-processors = <&zip_xy_scaler 1 4>; /* レイヤー中は1/4の速度 */
+        process-next;
     };
+};
 
+/ {
     behaviors {
         zip_dyn_scale: zip_dyn_scale {
             compatible = "zmk,behavior-zip-dynamic-scale";
