@@ -14,47 +14,47 @@
 
 &lt { quick-tap-ms = <200>; };
 
-/ {
-    &trackpad_listener_L {
-        status = "okay"; /* 最初はdisabledになっているので、ここで有効化します */
+&trackpad_listener_L {
+    status = "okay"; /* 最初はdisabledになっているので、ここで有効化します */
 
-        /* 通常時の速度調整：好みに合わせて数値を変更してください */
+    /* 通常時の速度調整：好みに合わせて数値を変更してください */
+    input-processors = <&trackpad_key_behaviors_L>,
+                      <&zip_xy_scaler 1 5>,        /* 5倍速（等速） */
+                      <&zip_scroll_scaler 1 12>,
+                      <&zip_dynamic_xy_scaler>,
+                      <&zip_dynamic_scroll_scaler>;
+
+    /* レイヤー1または2（精細・低速モード）に入ったときの速度調整 */
+    lowspeedmode {
+        layers = <1 2>;
         input-processors = <&trackpad_key_behaviors_L>,
-                          <&zip_xy_scaler 1 5>,        /* 5倍速（等速） */
-                          <&zip_scroll_scaler 1 12>,
+                          <&zip_xy_scaler 1 15>,       /* 15分の1（超低速） */
+                          <&zip_scroll_scaler 1 40>,
                           <&zip_dynamic_xy_scaler>,
                           <&zip_dynamic_scroll_scaler>;
-
-        /* レイヤー1または2（精細・低速モード）に入ったときの速度調整 */
-        lowspeedmode {
-            layers = <1 2>;
-            input-processors = <&trackpad_key_behaviors_L>,
-                              <&zip_xy_scaler 1 15>,       /* 15分の1（超低速） */
-                              <&zip_scroll_scaler 1 40>,
-                              <&zip_dynamic_xy_scaler>,
-                              <&zip_dynamic_scroll_scaler>;
-        };
     };
+};
 
-    &trackpad_listener_R {
-        status = "okay"; /* 右側も有効化 */
-        
+&trackpad_listener_R {
+    status = "okay"; /* 右側も有効化 */
+
+    input-processors = <&trackpad_key_behaviors_R>,
+                      <&zip_xy_scaler 1 5>,
+                      <&zip_scroll_scaler 1 12>,
+                      <&zip_dynamic_xy_scaler>,
+                      <&zip_dynamic_scroll_scaler>;
+
+    lowspeedmode {
+        layers = <1 2>;
         input-processors = <&trackpad_key_behaviors_R>,
-                          <&zip_xy_scaler 1 5>,
-                          <&zip_scroll_scaler 1 12>,
+                          <&zip_xy_scaler 1 15>,
+                          <&zip_scroll_scaler 1 40>,
                           <&zip_dynamic_xy_scaler>,
                           <&zip_dynamic_scroll_scaler>;
-
-        lowspeedmode {
-            layers = <1 2>;
-            input-processors = <&trackpad_key_behaviors_R>,
-                              <&zip_xy_scaler 1 15>,
-                              <&zip_scroll_scaler 1 40>,
-                              <&zip_dynamic_xy_scaler>,
-                              <&zip_dynamic_scroll_scaler>;
-        };
     };
+};
 
+/ {
     behaviors {
         zip_dyn_scale: zip_dyn_scale {
             compatible = "zmk,behavior-zip-dynamic-scale";
